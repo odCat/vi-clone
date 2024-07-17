@@ -18,9 +18,6 @@ int main()
         getyx(stdscr, y, x);
         switch (ch)
         {
-            case 'q':
-                endwin();
-                exit(0);
             case 'h':
                 move(y, x - 1);
                 break;
@@ -32,6 +29,18 @@ int main()
                 break;
             case 'l':
                 move(y, x + 1);
+                break;
+            case ':':
+                int cmd;
+                echo();
+                mvaddstr(LINES - 1, 0, ":");
+                cmd = getch();
+                if (cmd == 'q')
+                {
+                    endwin();
+                    exit(0);
+                }
+                noecho();
                 break;
             default:
                 break;
