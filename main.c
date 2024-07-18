@@ -8,11 +8,18 @@ int main()
     initscr();
     noecho();
 
+    if (has_colors())
+    {
+        start_color();
+
+        init_pair(1, COLOR_BLACK, COLOR_WHITE);
+    }
+
     addstr(text);
     move(0, 0);
 
     int ch;
-    while (ch = getch())
+    while ((ch = getch()))
     {
         int y, x;
         getyx(stdscr, y, x);
