@@ -15,15 +15,23 @@ int main()
         init_pair(1, COLOR_BLACK, COLOR_WHITE);
     }
 
+    int y, x;
     WINDOW *edit = newwin(LINES - 3, COLS, 0, 0);
     waddstr(edit, text);
     wmove(edit, 0, 0);
+    getyx(edit, y, x);
+    wrefresh(edit);
+
+    WINDOW *status = newwin(1, COLS, LINES - 2, 0);
+    wbkgd(status, COLOR_PAIR(1));
+
+    mvwprintw(status, 0, 0, "%d,%d", y, x);
+    wrefresh(status);
+    wrefresh(edit);
 
     int ch;
     while ((ch = wgetch(edit)))
     {
-        int y, x;
-        getyx(edit, y, x);
         switch (ch)
         {
             case 'h':
@@ -54,7 +62,9 @@ int main()
                 break;
 
         }
-
+        getyx(edit, y, x);
+        mvwprintw(status, 0, 0, "%d,%d", y, x);
+        wrefresh(status);
     }
 
     endwin();
