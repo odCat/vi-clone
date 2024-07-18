@@ -29,6 +29,8 @@ int main()
     wrefresh(status);
     wrefresh(edit);
 
+    WINDOW *command = newwin(1, COLS, LINES - 1, 0);
+
     int ch;
     while ((ch = wgetch(edit)))
     {
@@ -49,8 +51,8 @@ int main()
             case ':':
                 int cmd;
                 echo();
-                mvaddstr(LINES - 1, 0, ":");
-                cmd = getch();
+                mvwaddstr(command, 0, 0, ":");
+                cmd = wgetch(command);
                 if (cmd == 'q')
                 {
                     endwin();
@@ -65,6 +67,7 @@ int main()
         getyx(edit, y, x);
         mvwprintw(status, 0, 0, "%d,%d", y, x);
         wrefresh(status);
+        wrefresh(edit);
     }
 
     endwin();
