@@ -15,27 +15,28 @@ int main()
         init_pair(1, COLOR_BLACK, COLOR_WHITE);
     }
 
-    addstr(text);
-    move(0, 0);
+    WINDOW *edit = newwin(LINES - 3, COLS, 0, 0);
+    waddstr(edit, text);
+    wmove(edit, 0, 0);
 
     int ch;
-    while ((ch = getch()))
+    while ((ch = wgetch(edit)))
     {
         int y, x;
-        getyx(stdscr, y, x);
+        getyx(edit, y, x);
         switch (ch)
         {
             case 'h':
-                move(y, x - 1);
+                wmove(edit, y, x - 1);
                 break;
             case 'j':
-                move(y + 1, x);
+                wmove(edit, y + 1, x);
                 break;
             case 'k':
-                move(y - 1, x);
+                wmove(edit, y - 1, x);
                 break;
             case 'l':
-                move(y, x + 1);
+                wmove(edit, y, x + 1);
                 break;
             case ':':
                 int cmd;
