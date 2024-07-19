@@ -18,6 +18,7 @@ int main()
 
     int y, x;
     WINDOW *edit = newwin(LINES - 3, COLS, 0, 0);
+    keypad(edit, TRUE);
     waddstr(edit, text);
     wmove(edit, 0, 0);
     getyx(edit, y, x);
@@ -37,15 +38,19 @@ int main()
     {
         switch (ch)
         {
+            case KEY_LEFT:
             case 'h':
                 wmove(edit, y, x - 1);
                 break;
+            case KEY_DOWN:
             case 'j':
                 wmove(edit, y + 1, x);
                 break;
+            case KEY_UP:
             case 'k':
                 wmove(edit, y - 1, x);
                 break;
+            case KEY_RIGHT:
             case 'l':
                 wmove(edit, y, x + 1);
                 break;
