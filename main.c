@@ -59,6 +59,9 @@ int main()
                     endwin();
                     exit(0);
                 }
+                wmove(command, 0, 0);
+                wclrtoeol(command);
+                wrefresh(command);
                 noecho();
                 break;
             default:
