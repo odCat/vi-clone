@@ -1,5 +1,6 @@
 #include <ncurses.h>
 #include <stdlib.h>
+#include <string.h>
 
 int main()
 {
@@ -49,11 +50,11 @@ int main()
                 wmove(edit, y, x + 1);
                 break;
             case ':':
-                int cmd;
+                char cmd[32];
                 echo();
                 mvwaddstr(command, 0, 0, ":");
-                cmd = wgetch(command);
-                if (cmd == 'q')
+                wgetnstr(command, cmd, 32);
+                if (strcmp(cmd, "q") == 0)
                 {
                     endwin();
                     exit(0);
