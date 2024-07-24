@@ -60,6 +60,20 @@ int main()
             case 'l':
                 wmove(edit, y, x + 1);
                 break;
+            case 'i':
+                while ((ch = wgetch(edit)) != 27)
+                {
+                    if (ch == 127)
+                    {
+                        wmove(edit, y, --x);
+                        wdelch(edit);
+                    } else {
+                        winsch(edit, ch);
+                        wmove(edit, y, ++x);
+                        wrefresh(edit);
+                    }
+                }
+                break;
             case ':':
                 char cmd[32];
                 echo();
