@@ -16,6 +16,11 @@ int main()
         init_pair(1, COLOR_BLACK, COLOR_WHITE);
     }
 
+    if (NCURSES_MOUSE_VERSION > 0)
+    {
+        mousemask(BUTTON1_CLICKED, NULL);
+    }
+
     int y, x;
     WINDOW *edit = newwin(LINES - 3, COLS, 0, 0);
     keypad(edit, TRUE);
@@ -34,6 +39,7 @@ int main()
     WINDOW *command = newwin(1, COLS, LINES - 1, 0);
 
     int ch;
+    MEVENT mouse_event;
     while ((ch = wgetch(edit)))
     {
         switch (ch)
@@ -68,6 +74,10 @@ int main()
                 wclrtoeol(command);
                 wrefresh(command);
                 noecho();
+                break;
+            case KEY_MOUSE:
+                getmouse(&mouse_event);
+                wmove(edit, mouse_event.y, mouse_event.x);
                 break;
             default:
                 break;
