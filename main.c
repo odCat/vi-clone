@@ -106,8 +106,11 @@ void enter_insert_mode(WINDOW *edit, int y, int x)
         switch (ch)
         {
             case 127:
-                wmove(edit, y, --x);
-                wdelch(edit);
+                if (x != 0)
+                {
+                    wmove(edit, y, --x);
+                    wdelch(edit);
+                }
                 break;
             default:
                 winsch(edit, ch);
