@@ -72,6 +72,9 @@ int main()
                 wclrtoeol(edit);
                 enter_insert_mode(edit, y, x);
                 break;
+            case 'D':
+                wclrtoeol(edit);
+                break;
             case 'x':
                 wdelch(edit);
                 break;
