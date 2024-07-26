@@ -103,6 +103,7 @@ int main()
         }
         getyx(edit, y, x);
         mvwprintw(status, 0, 0, "%d,%d", y, x);
+        wclrtoeol(status);
         wrefresh(status);
         wrefresh(edit);
     }
