@@ -103,14 +103,17 @@ void enter_insert_mode(WINDOW *edit, int y, int x)
 
     while ((ch = wgetch(edit)) != 27)
     {
-        if (ch == 127)
+        switch (ch)
         {
-            wmove(edit, y, --x);
-            wdelch(edit);
-        } else {
-            winsch(edit, ch);
-            wmove(edit, y, ++x);
-            wrefresh(edit);
+            case 127:
+                wmove(edit, y, --x);
+                wdelch(edit);
+                break;
+            default:
+                winsch(edit, ch);
+                wmove(edit, y, ++x);
+                wrefresh(edit);
+                break;
         }
     }
 }
