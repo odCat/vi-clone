@@ -124,6 +124,7 @@ int main()
 void enter_insert_mode(WINDOW *edit, int y, int x)
 {
     int ch;
+    MEVENT mouse_event;
 
     while ((ch = wgetch(edit)) != 27)
     {
@@ -139,6 +140,12 @@ void enter_insert_mode(WINDOW *edit, int y, int x)
             case 10:
                 wmove(edit, ++y, x = 0);
                 winsertln(edit);
+                break;
+            case KEY_MOUSE:
+                getmouse(&mouse_event);
+                y = mouse_event.y;
+                x = mouse_event.x;
+                wmove(edit, mouse_event.y, mouse_event.x);
                 break;
             default:
                 winsch(edit, ch);
