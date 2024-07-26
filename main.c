@@ -46,6 +46,9 @@ int main()
     {
         switch (ch)
         {
+            case '0':
+                wmove(edit, y, 0);
+                break;
             case KEY_LEFT:
             case 'h':
                 wmove(edit, y, x - 1);
