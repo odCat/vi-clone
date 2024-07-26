@@ -65,6 +65,13 @@ int main()
             case 'x':
                 wdelch(edit);
                 break;
+            case 'X':
+                if (x != 0)
+                {
+                    wmove(edit, y, --x);
+                    wdelch(edit);
+                }
+                break;
             case 'i':
                 enter_insert_mode(edit, y, x);
                 break;
