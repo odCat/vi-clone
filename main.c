@@ -68,6 +68,10 @@ int main()
             case 'l':
                 wmove(edit, y, x + 1);
                 break;
+            case 'C':
+                wclrtoeol(edit);
+                enter_insert_mode(edit, y, x);
+                break;
             case 'x':
                 wdelch(edit);
                 break;
