@@ -6,6 +6,7 @@ WINDOW *status;
 
 void search(WINDOW *command);
 void enter_insert_mode(WINDOW *edit, int y, int x);
+void enter_command_mode(WINDOW *command);
 
 int main()
 {
@@ -95,22 +96,7 @@ int main()
                 enter_insert_mode(edit, y, x);
                 break;
             case ':':
-                char cmd[32];
-                echo();
-                wmove(command, 0, 0);
-                wclrtoeol(command);
-                wrefresh(command);
-                mvwaddstr(command, 0, 0, ":");
-                wgetnstr(command, cmd, 32);
-                if (strcmp(cmd, "q") == 0)
-                {
-                    endwin();
-                    exit(0);
-                }
-                wmove(command, 0, 0);
-                wclrtoeol(command);
-                wrefresh(command);
-                noecho();
+                enter_command_mode(command);
                 break;
             case KEY_MOUSE:
                 getmouse(&mouse_event);
@@ -182,4 +168,24 @@ void enter_insert_mode(WINDOW *edit, int y, int x)
         wrefresh(status);
         wrefresh(edit);
     }
+}
+
+void enter_command_mode(WINDOW *command)
+{
+    char cmd[32];
+    echo();
+    wmove(command, 0, 0);
+    wclrtoeol(command);
+    wrefresh(command);
+    mvwaddstr(command, 0, 0, ":");
+    wgetnstr(command, cmd, 32);
+    if (strcmp(cmd, "q") == 0)
+    {
+        endwin();
+        exit(0);
+    }
+    wmove(command, 0, 0);
+    wclrtoeol(command);
+    wrefresh(command);
+    noecho();
 }
