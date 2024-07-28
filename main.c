@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+WINDOW *status;
+
 void enter_insert_mode(WINDOW *edit, int y, int x);
 
 int main()
@@ -31,7 +33,7 @@ int main()
     getyx(edit, y, x);
     wrefresh(edit);
 
-    WINDOW *status = newwin(1, COLS, LINES - 2, 0);
+   status = newwin(1, COLS, LINES - 2, 0);
     wbkgd(status, COLOR_PAIR(1));
 
     mvwprintw(status, 0, 0, "%d,%d", y, x);
@@ -153,5 +155,10 @@ void enter_insert_mode(WINDOW *edit, int y, int x)
                 wrefresh(edit);
                 break;
         }
+        getyx(edit, y, x);
+        mvwprintw(status, 0, 0, "%d,%d", y, x);
+        wclrtoeol(status);
+        wrefresh(status);
+        wrefresh(edit);
     }
 }
