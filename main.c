@@ -54,6 +54,18 @@ int main()
             case '$':
                 wmove(edit, y, COLS - 1);
                 break;
+            case '/':
+                char search_term[32];
+                echo();
+                mvwaddstr(command, 0, 0, "/");
+                wgetnstr(command, search_term, 32);
+                wmove(command, 0, 0);
+                wclrtoeol(command);
+                wrefresh(command);
+                wprintw(command, "Searching for '%s'", search_term);
+                wrefresh(command);
+                noecho();
+                break;
             case KEY_LEFT:
             case 'h':
                 wmove(edit, y, x - 1);
