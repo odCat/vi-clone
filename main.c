@@ -93,6 +93,9 @@ int main()
             case ':':
                 char cmd[32];
                 echo();
+                wmove(command, 0, 0);
+                wclrtoeol(command);
+                wrefresh(command);
                 mvwaddstr(command, 0, 0, ":");
                 wgetnstr(command, cmd, 32);
                 if (strcmp(cmd, "q") == 0)
