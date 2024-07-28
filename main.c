@@ -4,6 +4,7 @@
 
 WINDOW *status;
 
+void search(WINDOW *command);
 void enter_insert_mode(WINDOW *edit, int y, int x);
 
 int main()
@@ -55,16 +56,7 @@ int main()
                 wmove(edit, y, COLS - 1);
                 break;
             case '/':
-                char search_term[32];
-                echo();
-                mvwaddstr(command, 0, 0, "/");
-                wgetnstr(command, search_term, 32);
-                wmove(command, 0, 0);
-                wclrtoeol(command);
-                wrefresh(command);
-                wprintw(command, "Searching for '%s'", search_term);
-                wrefresh(command);
-                noecho();
+                search(command);
                 break;
             case KEY_LEFT:
             case 'h':
@@ -136,6 +128,20 @@ int main()
     }
 
     endwin();
+}
+
+void search(WINDOW *command)
+{
+    char search_term[32];
+    echo();
+    mvwaddstr(command, 0, 0, "/");
+    wgetnstr(command, search_term, 32);
+    wmove(command, 0, 0);
+    wclrtoeol(command);
+    wrefresh(command);
+    wprintw(command, "Searching for '%s'", search_term);
+    wrefresh(command);
+    noecho();
 }
 
 void enter_insert_mode(WINDOW *edit, int y, int x)
