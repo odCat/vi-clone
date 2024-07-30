@@ -188,24 +188,24 @@ void enter_command_mode(WINDOW *command)
     int ch;
     for (int i = 0; i < 32; ++i)
     {
-        ch = wgetch(command);
-        if (ch == 10)
+        switch (ch = wgetch(command))
         {
-            if (strcmp(cmd, "q") == 0)
-            {
-                endwin();
-                exit(0);
-            } else {
+            case 10:
+                if (strcmp(cmd, "q") == 0)
+                {
+                    endwin();
+                    exit(0);
+                } else {
+                    clear_command(command);
+                    noecho();
+                    return;
+                }
+            case 27:
                 clear_command(command);
                 noecho();
-                break;
-            }
-        } else if (ch == 27) {
-            clear_command(command);
-            noecho();
-            break;
-        } else {
-            cmd[i] = ch;
+                return;
+            default:
+                cmd[i] = ch;
         }
     }
 }
