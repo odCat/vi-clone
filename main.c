@@ -181,6 +181,8 @@ void clear_command(WINDOW *command)
 void enter_command_mode(WINDOW *command)
 {
     char cmd[32];
+    int y, x;
+
     echo();
     clear_command(command);
     mvwaddstr(command, 0, 0, ":");
@@ -201,6 +203,19 @@ void enter_command_mode(WINDOW *command)
                 }
             case 27:
                     goto exiting_command_mode;
+            case 127:
+                getyx(command, y, x);
+                x -= 2;
+                wmove(command, y, x);
+                wclrtoeol(command);
+
+                if (x > 1)
+                {
+                    wmove(command, y, --x);
+                    wdelch(command);
+                }
+
+                break;
             default:
                 cmd[i] = ch;
                 break;
