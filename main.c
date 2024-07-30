@@ -6,6 +6,7 @@ WINDOW *status;
 
 void search(WINDOW *command);
 void enter_insert_mode(WINDOW *edit, int y, int x);
+void clear_command(WINDOW *command);
 void enter_command_mode(WINDOW *command);
 
 int main()
@@ -170,13 +171,18 @@ void enter_insert_mode(WINDOW *edit, int y, int x)
     }
 }
 
+void clear_command(WINDOW *command)
+{
+    wmove(command, 0, 0);
+    wclrtoeol(command);
+    wrefresh(command);
+}
+
 void enter_command_mode(WINDOW *command)
 {
     char cmd[32];
     echo();
-    wmove(command, 0, 0);
-    wclrtoeol(command);
-    wrefresh(command);
+    clear_command(command);
     mvwaddstr(command, 0, 0, ":");
 
     int ch;
@@ -190,16 +196,12 @@ void enter_command_mode(WINDOW *command)
                 endwin();
                 exit(0);
             } else {
-                wmove(command, 0, 0);
-                wclrtoeol(command);
-                wrefresh(command);
+                clear_command(command);
                 noecho();
                 break;
             }
         } else if (ch == 27) {
-            wmove(command, 0, 0);
-            wclrtoeol(command);
-            wrefresh(command);
+            clear_command(command);
             noecho();
             break;
         } else {
