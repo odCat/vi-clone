@@ -197,15 +197,16 @@ void enter_command_mode(WINDOW *command)
                     exit(0);
                 } else {
                     clear_command(command);
-                    noecho();
-                    return;
+                    goto exiting_command_mode;
                 }
             case 27:
-                clear_command(command);
-                noecho();
-                return;
+                    goto exiting_command_mode;
             default:
                 cmd[i] = ch;
+                break;
         }
     }
+    exiting_command_mode:
+    clear_command(command);
+    noecho();
 }
