@@ -178,14 +178,32 @@ void enter_command_mode(WINDOW *command)
     wclrtoeol(command);
     wrefresh(command);
     mvwaddstr(command, 0, 0, ":");
-    wgetnstr(command, cmd, 32);
-    if (strcmp(cmd, "q") == 0)
+
+    int ch;
+    for (int i = 0; i < 32; ++i)
     {
-        endwin();
-        exit(0);
+        ch = wgetch(command);
+        if (ch == 10)
+        {
+            if (strcmp(cmd, "q") == 0)
+            {
+                endwin();
+                exit(0);
+            } else {
+                wmove(command, 0, 0);
+                wclrtoeol(command);
+                wrefresh(command);
+                noecho();
+                break;
+            }
+        } else if (ch == 27) {
+            wmove(command, 0, 0);
+            wclrtoeol(command);
+            wrefresh(command);
+            noecho();
+            break;
+        } else {
+            cmd[i] = ch;
+        }
     }
-    wmove(command, 0, 0);
-    wclrtoeol(command);
-    wrefresh(command);
-    noecho();
 }
