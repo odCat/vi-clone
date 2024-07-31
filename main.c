@@ -211,6 +211,8 @@ void enter_command_mode(WINDOW *command)
 
                 if (x > 1)
                 {
+                    cmd[--i] = '\0';
+                    --i;
                     wmove(command, y, --x);
                     wdelch(command);
                 }
