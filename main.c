@@ -133,7 +133,7 @@ void enter_insert_mode(WINDOW *edit, int y, int x)
                     wdelch(edit);
                 }
                 break;
-            case 10:
+            case '\n':
                 wmove(edit, ++y, x = 0);
                 winsertln(edit);
                 break;
@@ -192,7 +192,7 @@ void enter_command_mode(WINDOW *command)
     {
         switch (ch = wgetch(command))
         {
-            case 10:
+            case '\n':
                 if (strcmp(cmd, "q") == 0)
                 {
                     endwin();
