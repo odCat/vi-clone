@@ -4,8 +4,8 @@
 
 WINDOW *status;
 
-void search(WINDOW *command);
 void enter_insert_mode(WINDOW *edit, int y, int x);
+void search(WINDOW *command);
 void clear_command(WINDOW *command);
 void enter_command_mode(WINDOW *command);
 
@@ -117,20 +117,6 @@ int main()
     endwin();
 }
 
-void search(WINDOW *command)
-{
-    char search_term[32];
-    echo();
-    mvwaddstr(command, 0, 0, "/");
-    wgetnstr(command, search_term, 32);
-    wmove(command, 0, 0);
-    wclrtoeol(command);
-    wrefresh(command);
-    wprintw(command, "Searching for '%s'", search_term);
-    wrefresh(command);
-    noecho();
-}
-
 void enter_insert_mode(WINDOW *edit, int y, int x)
 {
     int ch;
@@ -169,6 +155,20 @@ void enter_insert_mode(WINDOW *edit, int y, int x)
         wrefresh(status);
         wrefresh(edit);
     }
+}
+
+void search(WINDOW *command)
+{
+    char search_term[32];
+    echo();
+    mvwaddstr(command, 0, 0, "/");
+    wgetnstr(command, search_term, 32);
+    wmove(command, 0, 0);
+    wclrtoeol(command);
+    wrefresh(command);
+    wprintw(command, "Searching for '%s'", search_term);
+    wrefresh(command);
+    noecho();
 }
 
 void clear_command(WINDOW *command)
