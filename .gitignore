@@ -1,0 +1,14 @@
+# Ignore temp files
+*~
+*#
+.*.swp
+
+# Ignore object files
+*.o
+
+# Ignore executables
+a.exe
+a.out
+
+# Ignore gdb history
+.gdb_history
