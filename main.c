@@ -245,8 +245,11 @@ void enter_command_mode(WINDOW *command)
                 wmove(command, y, x);
                 wclrtoeol(command);
 
-                if (x > 1)
+                if (x == 1)
                 {
+                    clear_command(command);
+                    goto exiting_command_mode;
+                } else if (x > 1) {
                     cmd[--i] = '\0';
                     --i;
                     wmove(command, y, --x);
