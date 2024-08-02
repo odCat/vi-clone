@@ -6,8 +6,8 @@ WINDOW *status;
 
 void enter_insert_mode(WINDOW *edit, int y, int x);
 void search(WINDOW *command);
-void clear_command(WINDOW *command);
 void enter_command_mode(WINDOW *command);
+void clear_command(WINDOW *command);
 
 int main()
 {
@@ -207,13 +207,6 @@ void search(WINDOW *command)
     noecho();
 }
 
-void clear_command(WINDOW *command)
-{
-    wmove(command, 0, 0);
-    wclrtoeol(command);
-    wrefresh(command);
-}
-
 void enter_command_mode(WINDOW *command)
 {
     char cmd[32];
@@ -267,3 +260,11 @@ void enter_command_mode(WINDOW *command)
     clear_command(command);
     noecho();
 }
+
+void clear_command(WINDOW *command)
+{
+    wmove(command, 0, 0);
+    wclrtoeol(command);
+    wrefresh(command);
+}
+
