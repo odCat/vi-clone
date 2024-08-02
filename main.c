@@ -160,14 +160,50 @@ void enter_insert_mode(WINDOW *edit, int y, int x)
 void search(WINDOW *command)
 {
     char search_term[32];
+    int y, x;
+
     echo();
+    clear_command(command);
     mvwaddstr(command, 0, 0, "/");
-    wgetnstr(command, search_term, 32);
-    wmove(command, 0, 0);
-    wclrtoeol(command);
-    wrefresh(command);
-    wprintw(command, "Searching for '%s'", search_term);
-    wrefresh(command);
+
+    int ch;
+    for (int i = 0; i < 32; ++i)
+    {
+        switch (ch = wgetch(command))
+        {
+            case '\n':
+                clear_command(command);
+                wprintw(command, "Searching for '%s'", search_term);
+                wrefresh(command);
+                goto exiting_search;
+            case 27:
+                clear_command(command);
+                goto exiting_search;
+            case 127:
+                getyx(command, y, x);
+                x -= 2;
+                wmove(command, y, x);
+                wclrtoeol(command);
+
+                if (x == 1)
+                {
+                    clear_command(command);
+                    goto exiting_search;
+                } else if (x > 1) {
+                    search_term[--i] = '\0';
+                    --i;
+                    wmove(command, y, --x);
+                    wdelch(command);
+                }
+
+                break;
+            default:
+                search_term[i] = ch;
+                break;
+        }
+    }
+
+    exiting_search:
     noecho();
 }
 
@@ -223,6 +259,7 @@ void enter_command_mode(WINDOW *command)
                 break;
         }
     }
+
     exiting_command_mode:
     clear_command(command);
     noecho();
