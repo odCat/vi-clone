@@ -1,8 +1,8 @@
-override CFLAGS += -lncurses -Wall
+override CFLAGS += -lncurses -Wall -Wextra -Wno-unused-variable -pedantic
 
 vi: main.c
-	cc -o vi main.c $(CFLAGS)
+	$(CC) -o vi main.c $(CFLAGS)
 
 .PHONY: clean
 clean:
-	@rm vi *.o
+	-rm a.exe a.out vi *.o
