@@ -9,6 +9,7 @@
 # Ignore executables
 a.exe
 a.out
+vi
 
 # Ignore gdb history
 .gdb_history
