@@ -7,6 +7,7 @@
 
 #include "error.h"
 
+
 WINDOW *status;
 
 void enter_insert_mode(WINDOW *edit, int y, int x);
@@ -129,12 +130,6 @@ int main()
         errExit("Error closing file");
 }
 
-void errExit(char *err)
-{
-    printf("%s\n", err);
-    exit(EXIT_FAILURE);
-}
-
 void enter_insert_mode(WINDOW *edit, int y, int x)
 {
     int ch;
@@ -243,7 +238,7 @@ void enter_command_mode(WINDOW *command)
                 if (strcmp(cmd, "q") == 0)
                 {
                     endwin();
-                    exit(0);
+                    exit(EXIT_SUCCESS);
                 } else {
                     clear_command(command);
                     goto exiting_command_mode;
