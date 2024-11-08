@@ -7,6 +7,10 @@ Recently, while learning ncurses, I learnt the first version of
 vi was made using the curses library. This is how the library was
 chosen to be the backbone of the project.
 
+# Story mapping
+
+To see the story mapping of the project check the following [miro board](https://miro.com/app/board/uXjVLHs0dOc=/?share_link_id=884937787733).
+
 # Installation
 
 To build the project, run the command:
