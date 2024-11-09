@@ -1,3 +1,4 @@
+#include <curses.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -139,6 +140,8 @@ void enter_insert_mode(WINDOW *edit, int y, int x)
     {
         switch (ch)
         {
+            case KEY_BACKSPACE:
+            case 8:
             case 127:
                 if (x != 0)
                 {
