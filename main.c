@@ -9,6 +9,9 @@
 #include "error.h"
 
 
+#define MAX_CMD_LEN 32
+
+
 WINDOW *status;
 
 void enter_insert_mode(WINDOW *edit, int y, int x);
@@ -177,7 +180,7 @@ void enter_insert_mode(WINDOW *edit, int y, int x)
 
 void search(WINDOW *command)
 {
-    char search_term[32];
+    char search_term[MAX_CMD_LEN];
     int y, x;
 
     echo();
@@ -185,7 +188,7 @@ void search(WINDOW *command)
     mvwaddstr(command, 0, 0, "/");
 
     int ch;
-    for (int i = 0; i < 32; ++i)
+    for (int i = 0; i < MAX_CMD_LEN; ++i)
     {
         switch (ch = wgetch(command))
         {
@@ -227,7 +230,7 @@ void search(WINDOW *command)
 
 void enter_command_mode(WINDOW *command)
 {
-    char cmd[32];
+    char cmd[MAX_CMD_LEN];
     int y, x;
 
     echo();
@@ -235,7 +238,7 @@ void enter_command_mode(WINDOW *command)
     mvwaddstr(command, 0, 0, ":");
 
     int ch;
-    for (int i = 0; i < 32; ++i)
+    for (int i = 0; i < MAX_CMD_LEN; ++i)
     {
         switch (ch = wgetch(command))
         {
