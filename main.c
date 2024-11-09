@@ -105,6 +105,8 @@ int main()
                     wdelch(edit);
                 }
                 break;
+            case 'I':
+                wmove(edit, y, x=0);
             case 'i':
                 enter_insert_mode(edit, y, x);
                 break;
