@@ -108,6 +108,10 @@ int main()
                     wdelch(edit);
                 }
                 break;
+            case 'a':
+                wmove(edit, y, ++x);
+                enter_insert_mode(edit, y, x);
+                break;
             case 'I':
                 wmove(edit, y, x=0);
             case 'i':
