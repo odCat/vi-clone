@@ -1,10 +1,11 @@
-override CFLAGS += -lncurses -Wall -Wextra -Wno-unused-variable -pedantic
+override CFLAGS += -Wall -Wextra -Wno-unused-variable -pedantic
+LDLIBS = -lncurses
 SRC = *.c
 HDR = *.h
 OBJ = *.o
 
 vi: $(OBJ)
-	$(CC) -o vi $(OBJ) $(CFLAGS)
+	$(CC) $(CFLAGS) -o vi $(OBJ) $(LDLIBS)
 
 $(OBJ): $(SRC) $(HDR)
 	$(CC) -c $(SRC)
