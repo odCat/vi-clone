@@ -1,0 +1,16 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/x86_64-linux-gnu-gcc-10",
+      "-c",
+      "-o",
+      "test",
+      "test.c",
+      "-I/usr/include/glib-2.0",
+      "-I/usr/lib/x86_64-linux-gnu/glib-2.0/include"
+    ],
+    "directory": "/home/umbra/repos/c/vi-clone",
+    "file": "/home/umbra/repos/c/vi-clone/*.c",
+    "output": "/home/umbra/repos/c/vi-clone/*.o"
+  }
+]
