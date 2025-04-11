@@ -1,5 +1,5 @@
-override CFLAGS += -Wall -Wextra -Wno-unused-variable -pedantic
-LDLIBS = -lncurses
+override CFLAGS += `pkg-config --cflags glib-2.0` -Wall -Wextra -Wno-unused-variable -pedantic
+LDLIBS = `pkg-config --libs ncurses glib-2.0`
 SRC = *.c
 HDR = *.h
 OBJ = *.o
@@ -8,7 +8,7 @@ vi: $(OBJ)
 	$(CC) $(CFLAGS) -o vi $(OBJ) $(LDLIBS)
 
 $(OBJ): $(SRC) $(HDR)
-	$(CC) -c $(SRC)
+	$(CC) $(CFLAGS) -c $(SRC)
 
 .PHONY: clean
 clean:
